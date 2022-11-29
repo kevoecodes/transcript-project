@@ -12,11 +12,11 @@ Then,
 ### `python manage.py migrate`
 
 Then,
-### `python manage.py migrate`
+### `python manage.py createsuperuser`
 
 Enter your admin credentials, and finally
 
 ### `python manage.py runserver`
 
-[Link](https://github.com/facebook/create-react-app).
+[Link](http://127.0.0.1:7000/admin).
 
