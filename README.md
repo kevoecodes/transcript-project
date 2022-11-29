@@ -18,5 +18,5 @@ Enter your admin credentials, and finally
 
 ### `python manage.py runserver`
 
-[Link](http://127.0.0.1:7000/admin).
+Then [Click ME](http://127.0.0.1:7000/admin).
 
