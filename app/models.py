@@ -88,18 +88,6 @@ class Module(models.Model):
         return self.name
 
 
-class ClassModule(models.Model):
-    Class = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True)
-    module = models.ForeignKey(Module, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f'{self.Class.name} {self.module.name}'
-
-
-class Category(models.Model):
-    pass
-
-
 class OverallResult(models.Model):
     student = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
     class_award = models.CharField(max_length=200, verbose_name="Classification Award")
