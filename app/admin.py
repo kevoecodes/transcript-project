@@ -3,7 +3,7 @@ from .models import *
 
 _ = [Student, Class,
      Course, ClassModule, Category, Department,
-     OverallResult, SemesterStudentResult, NTALevel,
+     OverallResult, StudentModuleResult, NTALevel,
      Module, Enrollment
      ]
 

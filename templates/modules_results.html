@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/style.css' %}">
+</head>
+<body>
+
+   <div class="container">
+      <div class="row">
+           <div class="col">
+               <p class="heading">
+                   NAME: {{ student }}
+               </p>
+           </div>
+
+
+           <div class="col">
+               <p class="heading">
+                   REGISTRATION NUMBER: {{ student.reg_no }}
+               </p>
+           </div>
+
+           <div class="col">
+               <p class="heading">
+                   {{ student.course }}
+               </p>
+           </div>
+
+
+
+       </div>
+
+       <div class="row justify-content-start">
+           {% for result in results %}
+           <div class="col">
+                {% for semester in result.semesters_results %}
+                   <div class="row">
+                    <h4>{{ result.name }} {{ semester.semester }}</h4>
+                   <table class="table">
+                      <thead>
+                        <tr>
+
+                          <th scope="col">CODE</th>
+                          <th scope="col">MODULE NAME</th>
+                          <th scope="col">GRADE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for module in semester.modules %}
+                        <tr>
+                          <td>{{ module.code }}</td>
+                          <td>{{ module.name }} </td>
+                          <td>{{ module.grade }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                   <h5>SEMESTER GPA : 3.9</h5>
+                   </div>
+                {% endfor %}
+           </div>
+           {% endfor %}
+
+       </div>
+        <div class="row justify-content-start mt-5">
+           <a href="?page=1" > << Previous </a>
+       </div>
+
+   </div>
+
+</body>
+</html>

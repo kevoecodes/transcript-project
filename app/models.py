@@ -18,14 +18,24 @@ class Course(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=200, verbose_name='Student Name')
+    MALE = "M"
+    FEMALE = "F"
+
+    GENDERS = (
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+    )
+    first_name = models.CharField(max_length=200, verbose_name='Student First Names')
+    last_name = models.CharField(max_length=200, verbose_name='Student Last Name')
+    gender = models.CharField(max_length=200, choices=GENDERS, verbose_name='Student Gender')
+    dob = models.DateField(null=False)
     reg_no = models.CharField(max_length=200, verbose_name='Registration Number')
     form_four = models.CharField(max_length=200, verbose_name='Form Four Index Number')
     admission = models.CharField(max_length=200, verbose_name='Admission Number')
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.last_name.capitalize()} {self.first_name}"
 
 
 class Enrollment(models.Model):
@@ -43,12 +53,11 @@ class Enrollment(models.Model):
     enrollment_status = models.IntegerField(choices=STATUSES, null=False, verbose_name='Enrolment Status')
 
     def __str__(self):
-        return f'{self.student.name} Enrollment'
+        return f'{self.student} Enrollment'
 
 
 class NTALevel(models.Model):
     name = models.CharField(max_length=200, verbose_name='Level Name')
-    semester = models.CharField(max_length=200, verbose_name='Semester Name')
 
     def __str__(self):
         return self.name
@@ -93,28 +102,27 @@ class Category(models.Model):
 
 class OverallResult(models.Model):
     student = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
-    academic_year = models.CharField(max_length=200, verbose_name='Academic Year')
+    class_award = models.CharField(max_length=200, verbose_name="Classification Award")
     credits = models.FloatField(null=False)
     is_pass = models.BooleanField(null=False)
 
+    def __str__(self):
+        return f'{self.student} Overall'
 
-class SemesterStudentResult(models.Model):
-    PASSED = 0
-    NOT_PASSED = 0
+
+class StudentModuleResult(models.Model):
     STATUSES = (
-        (PASSED, 'Passed'),
-        (NOT_PASSED, 'Not Passed'),
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+        ('E', 'E'),
     )
     SEMESTERS = (
         (1, 'Semester 1'),
         (2, 'Semester 2'),
     )
     semester = models.IntegerField(choices=SEMESTERS, null=False)
-    module = models.ForeignKey(Module, on_delete=models.SET_NULL, null=True)
-    student = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
-    ca = models.FloatField(verbose_name='Continuous Assessments', null=False)
-    fe = models.FloatField(verbose_name='Final Examination', null=False)
-    status = models.IntegerField(choices=STATUSES, null=False)
-
-    def __str__(self):
-        return f'{self.student.name} Results'
+    student = models.ForeignKey(Student, verbose_name="Student", on_delete=models.SET_NULL, null=True)
+    module = models.ForeignKey(Module, verbose_name="Module", on_delete=models.SET_NULL, null=True)
+    grade = models.CharField(max_length=20, choices=STATUSES, verbose_name="Module Grade")
