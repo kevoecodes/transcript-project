@@ -78,7 +78,7 @@ class QueryStudentResults:
                 "name": nta_level.name,
                 "semesters_results": []
             }
-            for i in range(1, 3):
+            for i in range(1, nta_level.number_of_semesters + 1):
                 z = dict()
                 z['semester'] = f"SEMESTER {i}"
                 modules = []
