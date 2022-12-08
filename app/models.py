@@ -31,7 +31,6 @@ class Student(models.Model):
     dob = models.DateField(null=False)
     reg_no = models.CharField(max_length=200, verbose_name='Registration Number')
     form_four = models.CharField(max_length=200, verbose_name='Form Four Index Number')
-    admission = models.CharField(max_length=200, verbose_name='Admission Number')
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -58,6 +57,7 @@ class Enrollment(models.Model):
 
 class NTALevel(models.Model):
     name = models.CharField(max_length=200, verbose_name='Level Name')
+    number_of_semesters = models.IntegerField(null=False)
 
     def __str__(self):
         return self.name
