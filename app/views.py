@@ -71,14 +71,14 @@ class QueryStudentResults:
 
     def studentSemesterResults(self):
         module_results = StudentModuleResult.objects.filter(student=self.student.id)
-        nta_levels = NTALevel.objects.all()
+        nta_levels = CourseNTALevel.objects.filter(course=self.student.course.id)
         v = []
         for nta_level in nta_levels:
             nta_based_results = {
-                "name": nta_level.name,
+                "name": nta_level.nta_level.name,
                 "semesters_results": []
             }
-            for i in range(1, nta_level.number_of_semesters + 1):
+            for i in range(1, nta_level.nta_level.number_of_semesters + 1):
                 z = dict()
                 z['semester'] = f"SEMESTER {i}"
                 modules = []

@@ -4,7 +4,7 @@ from .models import *
 _ = [Student, Class,
      Course, Department,
      OverallResult, StudentModuleResult, NTALevel,
-     Module, Enrollment
+     Module, Enrollment, CourseNTALevel
      ]
 
 for i in _:

@@ -109,8 +109,17 @@ class StudentModuleResult(models.Model):
     SEMESTERS = (
         (1, 'Semester 1'),
         (2, 'Semester 2'),
+        (3, 'Semester 3'),
+        (4, 'Semester 4'),
+        (5, 'Semester 5'),
+        (6, 'Semester 6'),
     )
     semester = models.IntegerField(choices=SEMESTERS, null=False)
     student = models.ForeignKey(Student, verbose_name="Student", on_delete=models.SET_NULL, null=True)
     module = models.ForeignKey(Module, verbose_name="Module", on_delete=models.SET_NULL, null=True)
     grade = models.CharField(max_length=20, choices=STATUSES, verbose_name="Module Grade")
+
+
+class CourseNTALevel(models.Model):
+    course = models.ForeignKey(Course, verbose_name="Course", on_delete=models.SET_NULL, null=True)
+    nta_level = models.ForeignKey(NTALevel, verbose_name="NTA Level", on_delete=models.SET_NULL, null=True)
