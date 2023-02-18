@@ -6,60 +6,67 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+{#    <link rel="stylesheet" href="file:///D:/CLASS/DATABASE/transcript-project/static/css/bootstrap.css">#}
+{#    <link rel="stylesheet" href="file:///D:/CLASS/DATABASE/transcript-project/static/css/style.css">#}
     <link rel="stylesheet" href="{%  static 'css/style.css' %}">
 </head>
 <body>
    <div class="container">
-       <div class="row">
-           <div class="col-md-4">
-               <img src="{% static 'img/logo.png' %}" alt="" width="50%">
+       <div class="row mb-50 header-part">
+           <div class="col-2">
+               <img src="{% static 'img/logo.png' %}" alt="" width="100px" height="100px">
            </div>
 
-           <div class="col-md-8">
-               <center><h2>DAR ES SALAAM INSTITUTE OF TECHNOLOGY</h2></center>
+           <div class="col-10">
 
-                <center><h3>ACCADEMIC TRANSCRIPT</h3></center>
-           </div>
-       </div>
-
-       <div class="contents">
-           <div class="row">
-           <div class="col">
-               <p class="heading">
-                   SURNAME
-               </p>
-           </div>
-
-           <div class="col">
-               <p class="heading">
-                   GIVEN NAMES
-               </p>
-           </div>
-
-           <div class="col">
-               <p class="heading">
-                   BIRTHDATE
-               </p>
-           </div>
-
-           <div class="col">
-               <p class="heading">
-                   GENDER
-               </p>
-           </div>
-
-
-           <div class="col">
-               <p class="heading">
-                   REGISTRATION NUMBER
-               </p>
+               <center>
+                   <h2>DAR ES SALAAM INSTITUTE OF TECHNOLOGY</h2>
+               </center>
+               <center>
+                   <h3>ACCADEMIC TRANSCRIPT</h3>
+               </center>
            </div>
        </div>
 
+       <div class="contents mt-50">
+           <div class="first-section">
+               <div class="row heading-row">
+                   <div class="col">
+                       <p class="heading">
+                           SURNAME
+                       </p>
+                   </div>
 
-       <div class="row">
+                   <div class="col">
+                       <p class="heading">
+                           GIVEN NAMES
+                       </p>
+                   </div>
+
+                   <div class="col">
+                       <p class="heading">
+                           BIRTHDATE
+                       </p>
+                   </div>
+
+                   <div class="col">
+                       <p class="heading">
+                           GENDER
+                       </p>
+                   </div>
+
+
+                   <div class="col">
+                       <p class="heading">
+                           REGISTRATION NUMBER
+                       </p>
+                   </div>
+               </div>
+
+
+               <div class="row">
            <div class="col">
-               <p class="heading_2">
+               <p class="heading_">
                    {{ surname }}
                </p>
            </div>
@@ -89,8 +96,9 @@
                </p>
            </div>
        </div>
+           </div>
 
-       <div class="row">
+         <div class="row second-section">
            <div class="col">
                <p class="heading">
                    DATE OF ADMISSION
@@ -120,7 +128,7 @@
        </div>
 
 
-       <div class="row">
+       <div class="row mk-40">
            <div class="col">
                <p class="heading">
                    AWARD TITLE
@@ -136,7 +144,7 @@
        </div>
 
 
-       <div class="row">
+       <div class="row mk-40">
            <div class="col">
                <p class="heading">
                    CLASSIFICATION OF AWARD
@@ -152,7 +160,7 @@
        </div>
 
 
-       <div class="row">
+       <div class="row mk-40">
            <div class="col">
                <p class="heading">
                    OVERALL GPA
@@ -169,15 +177,12 @@
 
        </div>
 
-       <div class="note">
-           <p class="nb">
-               NOTE: The Award Title and Classification is based on NTA Level 6 only
-           </p>
-       </div>
-       <div class="row justify-content-end mt-5">
-           <a href="?page=2" > Next >> </a>
-       </div>
    </div>
+    <div class="footer-mark">
+        <p class="nb">
+               NOTE: The Award Title and Classification is based on NTA Level 6 only
+        </p>
+    </div>
 
 </body>
 </html>

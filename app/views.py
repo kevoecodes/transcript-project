@@ -8,12 +8,21 @@ from .models import *
 def chooseStudent(request):
     if request.method == "GET":
         students = Student.objects.all()
-        return render(request, 'index.html', {"students": students})
+        return render(request, 'student-transcript.html', {"students": students})
 
     return redirect('/students')
 
 
+def studentsList(request):
+    if request.user.is_authenticated:
+        students = Student.objects.all()
+        return render(request, 'students.html', {"students": students})
+
+    return redirect('/login-page')
+
+
 def generateTranscript(request, pk):
+
     if request.method == "GET":
         page = request.GET.get('page', None)
         if page is not None:
@@ -68,6 +77,27 @@ class QueryStudentResults:
             "class_award": result.class_award,
             "overall_gpa": result.credits
         }
+    def gpa(self, modules):
+        grades = {
+            "A": 5,
+            "B": 3,
+            "C": 2,
+            "D": 1,
+            "F": 0
+        }
+        A, B_P, B, C, D, F = 5, 4, 3, 2, 1, 0
+        sum = 0
+        sum_credits = 0
+        for module in modules:
+            sum += (grades[str(module.grade)] * int(module.module.credits))
+            sum_credits += int(module.module.credits)
+        gpa = 0
+        try:
+            gpa = round(sum / sum_credits, 2)
+        except Exception as e:
+            pass
+
+        return str(gpa)
 
     def studentSemesterResults(self):
         module_results = StudentModuleResult.objects.filter(student=self.student.id)
@@ -90,7 +120,7 @@ class QueryStudentResults:
                         "grade": module.grade
                     })
                 z['modules'] = modules
-                z['semester_gpa'] = "3.123"
+                z['semester_gpa'] = self.gpa(modules_)
                 nta_based_results['semesters_results'].append(z)
 
             v.append(nta_based_results)

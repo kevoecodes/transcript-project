@@ -11,36 +11,34 @@
 <body>
 
    <div class="container">
-      <div class="row">
+      <div class="row mk-40">
            <div class="col">
-               <p class="heading">
+               <p class="heading_3">
                    NAME: {{ student }}
                </p>
            </div>
 
 
            <div class="col">
-               <p class="heading">
+               <p class="heading_3">
                    REGISTRATION NUMBER: {{ student.reg_no }}
                </p>
            </div>
 
            <div class="col">
-               <p class="heading">
+               <p class="heading_3">
                    {{ student.course }}
                </p>
            </div>
 
-
-
        </div>
 
-       <div class="row justify-content-start">
+       <div class="row">
            {% for result in results %}
-           <div class="col">
+           <div class="row">
                 {% for semester in result.semesters_results %}
-                   <div class="row">
-                    <h4>{{ result.name }} {{ semester.semester }}</h4>
+                   <div class="col">
+                    <h3>{{ result.name }} {{ semester.semester }}</h3>
                    <table class="table">
                       <thead>
                         <tr>
@@ -60,16 +58,11 @@
                         {% endfor %}
                       </tbody>
                     </table>
-                   <h5>SEMESTER GPA : 3.9</h5>
+                   <h5>SEMESTER GPA : {{ semester.semester_gpa }}</h5>
                    </div>
                 {% endfor %}
            </div>
            {% endfor %}
-
-       </div>
-        <div class="row justify-content-start mt-5">
-           <a href="?page=1" > << Previous </a>
-       </div>
 
    </div>
 

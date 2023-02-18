@@ -16,8 +16,42 @@ h2{
 
 .heading{
     font-weight: bold;
+    font-size: x-large;
+}
+.heading_2{
+    font-size: large;
+}
+.heading_3{
+    font-weight: bold;
+    font-size: large;
+}
+.data {
+    font-size: large;
 }
 
 .contents{
     margin-top: 50px;
 }
+.header-part{
+    margin-bottom: 90px;
+}
+
+.heading-row {
+    margin-bottom: 20px;
+}
+
+.first-section {
+    margin-bottom: 40px;
+}
+.second-section {
+    margin-bottom: 40px;
+}
+
+.mk-40 {
+    margin-bottom: 40px;
+}
+
+.footer-mark {
+    position: absolute;
+    bottom: 5%;
+ }

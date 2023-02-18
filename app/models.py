@@ -37,6 +37,19 @@ class Student(models.Model):
         return f"{self.last_name.capitalize()} {self.first_name}"
 
 
+class Lecturer(models.Model):
+
+    first_name = models.CharField(max_length=200, verbose_name='Lecturer First Names')
+    last_name = models.CharField(max_length=200, verbose_name='Lecturer Last Name')
+    cellphone = models.CharField(max_length=200, verbose_name='Lecturer Cellphone')
+    email = models.EmailField(max_length=200, verbose_name='Email')
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.last_name.capitalize()} {self.first_name}"
+
+
+
 class Enrollment(models.Model):
     INCOMPLETE = 0
     COMPLETE = 1
@@ -104,7 +117,7 @@ class StudentModuleResult(models.Model):
         ('B', 'B'),
         ('C', 'C'),
         ('D', 'D'),
-        ('E', 'E'),
+        ('F', 'F'),
     )
     SEMESTERS = (
         (1, 'Semester 1'),
@@ -118,6 +131,9 @@ class StudentModuleResult(models.Model):
     student = models.ForeignKey(Student, verbose_name="Student", on_delete=models.SET_NULL, null=True)
     module = models.ForeignKey(Module, verbose_name="Module", on_delete=models.SET_NULL, null=True)
     grade = models.CharField(max_length=20, choices=STATUSES, verbose_name="Module Grade")
+
+    def __str__(self):
+        return f'{self.student} {self.module} Results'
 
 
 class CourseNTALevel(models.Model):
