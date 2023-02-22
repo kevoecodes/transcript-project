@@ -3,16 +3,16 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from app.lecturers_manager.serializers import LecturerSerializer
-from app.models import Course, Lecturer
+from app.models import Course, Lecturer, Class
 
 
 def registerLecturer(request):
     if request.user.is_authenticated and request.user.is_staff:
         if request.method == 'GET':
             courses = Course.objects.all()
-            return render(request, 'registerLecturer.html', {"courses": courses})
+            classes = Class.objects.all()
+            return render(request, 'registerLecturer.html', {"classes": classes})
         elif request.method == "POST":
-            print(request.POST)
             serializer = LecturerSerializer(data=request.POST)
             if serializer.is_valid():
                 print('Valid')
@@ -26,8 +26,7 @@ def registerLecturer(request):
                 return redirect('/')
 
             print(serializer.errors)
-            #
-            return redirect('/register-lecurer')
+            return redirect('/register-lecturer')
 
     return redirect('login-page')
 

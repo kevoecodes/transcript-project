@@ -14,6 +14,8 @@
     <main class="main-content">
 
         {% include 'sidebar.html' %}
+        <form method="post" action="/assign-marks/{{ id }}">
+        {% csrf_token %}
 
         <div class="contents">
 
@@ -22,15 +24,18 @@
                     <div class="col-lg-12">
 
                         <div class="breadcrumb-main">
-                            <h4 class="text-capitalize breadcrumb-title">Lecturers</h4>
+                            <h4 class="text-capitalize breadcrumb-title">Students {{ class }}</h4>
 
                             <div class="breadcrumb-action justify-content-center flex-wrap">
                                 <div class="action-btn">
-                                    <a href="/register-lecturer" class="btn btn-sm btn-primary btn-add">
-                                        <i class="la la-plus"></i> Register Lecturer</a>
+                                    <button type="submit" class="btn btn-sm btn-primary btn-add">
+                                         Submit Marks
+                                    </button>
                                 </div>
-                            </div>
+                         </div>
                         </div>
+
+
 
                     </div>
                 </div>
@@ -45,46 +50,42 @@
                                             <thead>
                                                 <tr class="userDatatable-header">
                                                     <th>
-                                                        <span class="userDatatable-title">Lecturer Name</span>
+                                                        <span class="userDatatable-title">Full Name</span>
                                                     </th>
                                                     <th>
-                                                        <span class="userDatatable-title">Course</span>
+                                                        <span class="userDatatable-title">Registration Number</span>
                                                     </th>
-                                                    <!-- <th>
-                                                        <span class="userDatatable-title">Tariff</span>
-                                                    </th> -->
                                                     <th>
-                                                        <span class="userDatatable-title">Action</span>
+                                                        <span class="userDatatable-title">CA</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">FE</span>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for lecturer in lecturers %}
+                                                {% for student in students %}
 
                                                 <tr>
                                                     <td>
                                                         <div class="userDatatable-content">
-                                                            {{ lecturer.first_name }} {{ lecturer.last_name }}
+                                                            {{ student.first_name }} {{ student.last_name }}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="userDatatable-content">
-                                                            {{ lecturer.ass_class }}
+                                                            {{ student.reg_no }}
                                                         </div>
                                                     </td>
 
-
-                                                    <!-- <td>
-                                                        <div class="userDatatable-content">
-                                                            {{ user.tariff }}
-                                                        </div>
-                                                    </td> -->
-
                                                     <td>
-                                                        <div class="userDatatable-content" style="display: flex;">
-
-                                                            <a href="/student-profile/{{ student.id}}" class="btn btn-outline-success">View</a>
-
+                                                        <div class="userDatatable-content">
+                                                            <input type="number" name="mark_{{ student.id }}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02"  required>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            <input type="number" name="mark_{{ student.id }}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02"  required>
                                                         </div>
                                                     </td>
 
@@ -109,7 +110,8 @@
         </div>
 
         </div>
-        {% include 'footer.html' %}
+        </form>
+            {% include 'footer.html' %}
     </main>
    {% include 'overlayer.html' %}
 

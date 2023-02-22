@@ -23,23 +23,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-main">
-                            <h1>Student Information</h1>
-                            {% if edit_mode ==  True and request.user.is_staff %}
-                            <div class="breadcrumb-action justify-content-center flex-wrap">
-                                <div class="action-btn">
-                                    <form action="/delete-student" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" style="display: none;" name="regNo" value="{{ student.regNo }}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" required>
-                                        <button type="submit" class="btn btn-sm btn-danger btn-add">
-                                            <i class="fa fa-trash"></i> Delete Student
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            {%endif%}
+                            <h1>Lecturer Information</h1>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="form-element">
@@ -48,95 +33,52 @@
                             <div class="card card-default card-md mb-4">
 
                                 <div class="card-body pb-md-50">
-                                    <form action="{% if edit_mode == True%}/edit-student/{{id}} {%else%}/register-student {%endif%}" method="POST">
+                                    <form action="/register-lecturer" method="POST">
                                         {% csrf_token %}
                                         <div class="form-row mx-n15">
-                                            <div class="col-md-4 mb-20 px-15">
+                                            <div class="col-md-6 mb-20 px-15">
                                                 <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">First
                                                     name</label>
                                                 <input type="text" name="first_name" value="{{student.first_name}}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. Mark" required>
                                             </div>
-                                            <div class="col-md-4 mb-20 px-15">
+                                            <div class="col-md-6 mb-20 px-15">
                                                 <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
                                                     Last name
                                                 </label>
                                                 <input type="text" value="{{student.last_name}}" name="last_name" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="eg. Clayton" required>
                                             </div>
-                                            <div class="col-md-4 mb-20 px-15">
-                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">
-                                                    Date of Birth
-                                                </label>
-                                                <input type="date" value="{{student.dob}}" name="dob" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. mark@gmail.com" required>
-                                            </div>
 
                                         </div>
+                                         <div class="form-row mx-n15">
+                                             <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
+                                                   Email
+                                                </label>
+                                                <input type="email" value="{{student.last_name}}" name="email" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="eg. Clayton" required>
+                                            </div>
+                                             <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
+                                                   Cellphone
+                                                </label>
+                                                <input type="text" value="{{student.last_name}}" name="cellphone" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="eg. Clayton" required>
+                                            </div>
+                                         </div>
                                         <div class="form-row mx-n15">
 
-                                            <div class="col-md-6 mb-20 px-15">
-                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">
-                                                    Form 4 Index
+                                        <div class="col-md-6 mb-20 px-15">
+                                                 <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
+                                                    Class
                                                 </label>
-                                                <input type="text" name="{% if edit_mode == True%}form_four{%else%}form_four{%endif%}" value="{{student.regNo}}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. 20023022..." required>
-                                            </div>
-                                            <div class="col-md-6 mb-20 px-15">
-                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">
-                                                    Registration Number
-                                                </label>
-                                                <input type="text" name="{% if edit_mode == True%}new_reg_no{%else%}reg_no{%endif%}" value="{{student.regNo}}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. 20023022..." required>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-row mx-n15">
-
-
-                                            <div class="col-md-6 mb-20 px-15">
-                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
-                                                    Gender
-                                                </label>
-                                                <select type="text" name="gender" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" required>
-                                                    {% if edit_mode == True and student.gender == 'M'%}
-                                                    <option value="M"> Male </option>
-                                                    <option value="F">Female</option>
-                                                    {% elif edit_mode == True and student.gender == 'F' %}
-
-                                                    <option value="F"> Female </option>
-                                                    <option value="M">Male</option>
-
-                                                    {%else%}
-                                                    <option value="M"> Male </option>
-                                                    <option value="F">Female</option>
-
-                                                    {%endif%}
-
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-20 px-15">
-                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
-                                                    Course
-                                                </label>
-                                                <select type="text" name="course" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" required>
-                                                    {% for course in courses %}
-                                                        <option value="{{ course.id }}"> {{ course.name }} </option>
+                                                <select type="text" name="ass_class" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" required>
+                                                    {% for class in classes %}
+                                                        <option value="{{ class.id }}"> {{ class.name }} </option>
                                                     {% endfor %}
 
                                                 </select>
-                                            </div>
+                                         </div>
+
 
                                         </div>
-                                    <div class="form-row mx-n15">
-                                        <div class="col-md-6 mb-20 px-15">
-                                            <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">
-                                                Date of Admission
-                                            </label>
-                                            <input type="date" value="{{student.dob}}" name="starting_year" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. mark@gmail.com" required>
-                                        </div>
-                                        <div class="col-md-6 mb-20 px-15">
-                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">
-                                                    Date of Graduation
-                                                </label>
-                                                <input type="date" value="{{student.dob}}" name="end_year" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="eg. mark@gmail.com" required>
-                                            </div>
-                                    </div>
 
 
 
