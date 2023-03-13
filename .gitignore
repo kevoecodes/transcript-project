@@ -133,7 +133,6 @@ dmypy.json
 
 # Shitty files
 media/
-static/
 /theme/static_src/node_modules
 index2.html
 .vscode/*
