@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 # Create your models here.
 
@@ -16,6 +17,7 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+
 class NTALevel(models.Model):
     name = models.CharField(max_length=200, verbose_name='Level Name')
     number_of_semesters = models.IntegerField(null=False)
@@ -23,10 +25,12 @@ class NTALevel(models.Model):
     def __str__(self):
         return self.name
 
+
 class Class(models.Model):
     name = models.CharField(max_length=200, verbose_name='Class Name')
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     nta_level = models.ForeignKey(NTALevel, on_delete=models.SET_NULL, null=True)
+    current_level = models.IntegerField(default=1, null=False)
 
     def __str__(self):
         return self.name
@@ -53,9 +57,6 @@ class Student(models.Model):
         return f"{self.last_name.capitalize()} {self.first_name}"
 
 
-
-
-
 class Enrollment(models.Model):
     INCOMPLETE = 0
     COMPLETE = 1
@@ -74,24 +75,9 @@ class Enrollment(models.Model):
         return f'{self.student} Enrollment'
 
 
-
-
 class HOD(models.Model):
     name = models.CharField(max_length=200, verbose_name='HOD Name')
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
-
-
-
-class Lecturer(models.Model):
-
-    first_name = models.CharField(max_length=200, verbose_name='Lecturer First Names')
-    last_name = models.CharField(max_length=200, verbose_name='Lecturer Last Name')
-    cellphone = models.CharField(max_length=200, verbose_name='Lecturer Cellphone')
-    email = models.EmailField(max_length=200, verbose_name='Email')
-    ass_class = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f"{self.last_name.capitalize()} {self.first_name}"
 
 
 class Module(models.Model):
@@ -103,6 +89,20 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Lecturer(models.Model):
+
+    first_name = models.CharField(max_length=200, verbose_name='Lecturer First Names')
+    last_name = models.CharField(max_length=200, verbose_name='Lecturer Last Name')
+    cellphone = models.CharField(max_length=200, verbose_name='Lecturer Cellphone')
+    email = models.EmailField(max_length=200, verbose_name='Email')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    ass_class = models.ForeignKey(Class, on_delete=models.SET_NULL, null=True)
+    module = models.ForeignKey(Module, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.last_name.capitalize()} {self.first_name}"
 
 
 class OverallResult(models.Model):
@@ -145,3 +145,10 @@ class StudentModuleResult(models.Model):
 class CourseNTALevel(models.Model):
     course = models.ForeignKey(Course, verbose_name="Course", on_delete=models.SET_NULL, null=True)
     nta_level = models.ForeignKey(NTALevel, verbose_name="NTA Level", on_delete=models.SET_NULL, null=True)
+
+
+class ResultsAssignment(models.Model):
+    lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True)
+    module = models.ForeignKey(Module, on_delete=models.SET_NULL, null=True)
+    semester = models.IntegerField(default=1, null=False)
+    nta_level = models.ForeignKey(NTALevel, on_delete=models.SET_NULL, null=True)

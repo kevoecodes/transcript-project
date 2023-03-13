@@ -84,6 +84,10 @@ def studentProfile(request, pk):
 
 
 def assignMarks(request, pk):
+    c = request.GET.get('c', None)
+    print(c)
+    if c is not None:
+        pass
     if request.method == "GET":
         try:
             ass_class = Class.objects.get(id=pk)

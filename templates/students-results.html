@@ -22,14 +22,15 @@
                     <div class="col-lg-12">
 
                         <div class="breadcrumb-main">
-                            <h4 class="text-capitalize breadcrumb-title">Lecturers</h4>
-
+                            <h4 class="text-capitalize breadcrumb-title">{{ lecturer.ass_class }}'s {{ lecturer.module }} ({{ lecturer.module.code }}) results</h4>
+                            {%if request.user.is_staff%}
                             <div class="breadcrumb-action justify-content-center flex-wrap">
                                 <div class="action-btn">
-                                    <a href="/register-lecturer" class="btn btn-sm btn-primary btn-add">
-                                        <i class="la la-plus"></i> Register Lecturer</a>
+                                    <a href="register-student" class="btn btn-sm btn-primary btn-add">
+                                        <i class="la la-plus"></i> Register Student</a>
                                 </div>
                             </div>
+                            {%endif%}
                         </div>
 
                     </div>
@@ -45,40 +46,61 @@
                                             <thead>
                                                 <tr class="userDatatable-header">
                                                     <th>
-                                                        <span class="userDatatable-title">Lecturer Name</span>
+                                                        <span class="userDatatable-title">Full Name</span>
                                                     </th>
                                                     <th>
-                                                        <span class="userDatatable-title">Course</span>
+                                                        <span class="userDatatable-title">Registration Number</span>
                                                     </th>
-                                                    <!-- <th>
-                                                        <span class="userDatatable-title">Tariff</span>
-                                                    </th> -->
                                                     <th>
-                                                        <span class="userDatatable-title">Action</span>
+                                                        <span class="userDatatable-title">Gender</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">CA</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">FA</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">Grade</span>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for lecturer in lecturers %}
+                                                {% for result in results %}
 
                                                 <tr>
                                                     <td>
                                                         <div class="userDatatable-content">
-                                                            {{ lecturer.first_name }} {{ lecturer.last_name }}
+                                                            {{ result.student.first_name }} {{ result.student.last_name }}
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="userDatatable-content">
-                                                            {{ lecturer.ass_class }}
+                                                            {{ result.student.reg_no }}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="userDatatable-content" style="display: flex;">
-
-                                                            <a href="/lecturer-profile/{{ lecturer.id}}" class="btn btn-outline-success">View</a>
-
+                                                        <div class="userDatatable-content">
+                                                            {{ result.student.gender }}
                                                         </div>
                                                     </td>
+
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ result.ca }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ result.fe }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ result.grade }}
+                                                        </div>
+                                                    </td>
+
 
                                                 </tr>
 

@@ -76,6 +76,17 @@
 
                                                 </select>
                                          </div>
+                                        <div class="col-md-6 mb-20 px-15">
+                                                 <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">
+                                                    Module
+                                                </label>
+                                                <select type="text" name="ass_class" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" required>
+                                                    {% for module in modules %}
+                                                        <option value="{{ module.id }}"> {{ module.name }} </option>
+                                                    {% endfor %}
+
+                                                </select>
+                                         </div>
 
 
                                         </div>

@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -16,6 +17,27 @@ def chooseStudent(request):
 def studentsList(request):
     if request.user.is_authenticated:
         students = Student.objects.all()
+        if str(request.user.last_name) == "2":
+            lecturer = Lecturer.objects.get(user=request.user)
+            try:
+                assign = ResultsAssignment.objects.get(
+                    semester=lecturer.ass_class.current_level,
+                    module=lecturer.module,
+                    lecturer=lecturer
+                )
+                results = StudentModuleResult.objects.filter(
+                    semester=lecturer.ass_class.current_level,
+                    module=lecturer.module,
+
+                )
+                return render(request, 'students-results.html', {
+                    "results": results, "lecturer": lecturer})
+            except ResultsAssignment.DoesNotExist:
+                print("Does Not Exist")
+                students = students.filter(ass_class=lecturer.ass_class)
+                return render(request, 'marks.html', {
+                    "students": students, "lecturer": lecturer})
+
         return render(request, 'students.html', {"students": students})
 
     return redirect('/login-page')
@@ -141,3 +163,8 @@ class QueryStudentResults:
             return self.studentOverallResults()
         else:
             return self.studentSemesterResults()
+
+
+def Logout(request):
+    logout(request)
+    return redirect('login-page')
