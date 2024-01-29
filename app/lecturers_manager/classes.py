@@ -56,16 +56,22 @@ class PostResults:
     @staticmethod
     def deduceGrade(ca, fe):
         total = int(ca) + int(fe)
-        if total > 90:
+        if total > 70:
             return "A"
-        elif total > 70:
-            return "B"
+        elif total > 60:
+            return "B+"
 
         elif total > 50:
+            return "B"
+
+        elif total > 40:
             return "C"
 
-        elif total > 30:
+        elif total > 35:
             return "D"
+        
+        elif total < 35:
+            return "F"
 
         else:
             return "F"

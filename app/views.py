@@ -102,12 +102,12 @@ class QueryStudentResults:
     def gpa(self, modules):
         grades = {
             "A": 5,
+            "B+": 4,
             "B": 3,
             "C": 2,
             "D": 1,
             "F": 0
         }
-        A, B_P, B, C, D, F = 5, 4, 3, 2, 1, 0
         sum = 0
         sum_credits = 0
         for module in modules:

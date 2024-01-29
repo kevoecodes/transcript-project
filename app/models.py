@@ -118,6 +118,7 @@ class OverallResult(models.Model):
 class StudentModuleResult(models.Model):
     STATUSES = (
         ('A', 'A'),
+        ('B+', 'B'),
         ('B', 'B'),
         ('C', 'C'),
         ('D', 'D'),
